@@ -106,7 +106,7 @@ class ScsiBlockDevice(private val usbCommunication: UsbCommunication, private va
 
         val readCapacity = ScsiReadCapacity(lun=lun)
         inBuffer.clear()
-        transferCommand(readCapacity, inBuffer)
+        //transferCommand(readCapacity, inBuffer)
         inBuffer.clear()
         val readCapacityResponse = ScsiReadCapacityResponse.read(inBuffer)
         blockSize = readCapacityResponse.blockLength
@@ -149,7 +149,7 @@ class ScsiBlockDevice(private val usbCommunication: UsbCommunication, private va
                 when {
                     i == MAX_RECOVERY_ATTEMPTS -> {
                         Log.d(TAG, "Giving up")
-                       // throw e
+                        throw e
                     }
                     i % 2 == 0 -> {
                         Log.d(TAG, "Reset bulk-only mass storage")
@@ -169,7 +169,7 @@ class ScsiBlockDevice(private val usbCommunication: UsbCommunication, private va
             }
         }
 
-       // throw IllegalStateException("This should never happen.")
+        throw IllegalStateException("This should never happen.")
     }
 
     private fun bulkOnlyMassStorageReset() {
