@@ -149,7 +149,7 @@ class ScsiBlockDevice(private val usbCommunication: UsbCommunication, private va
                 when {
                     i == MAX_RECOVERY_ATTEMPTS -> {
                         Log.d(TAG, "Giving up")
-                        throw e
+                      //  throw e
                     }
                     i % 2 == 0 -> {
                         Log.d(TAG, "Reset bulk-only mass storage")
@@ -169,7 +169,7 @@ class ScsiBlockDevice(private val usbCommunication: UsbCommunication, private va
             }
         }
 
-        throw IllegalStateException("This should never happen.")
+       // throw IllegalStateException("This should never happen.")
     }
 
     private fun bulkOnlyMassStorageReset() {
@@ -291,7 +291,7 @@ class ScsiBlockDevice(private val usbCommunication: UsbCommunication, private va
     }
 
     companion object {
-        private const val MAX_RECOVERY_ATTEMPTS = 3
+        private const val MAX_RECOVERY_ATTEMPTS = 1
         private val TAG = ScsiBlockDevice::class.java.simpleName
     }
 }
