@@ -107,7 +107,7 @@ class ScsiBlockDevice(private val usbCommunication: UsbCommunication, private va
         val readCapacity = ScsiReadCapacity(lun=lun)
         inBuffer.clear()
         //transferCommand(readCapacity, inBuffer)
-        inBuffer.clear()
+       // inBuffer.clear()
         val readCapacityResponse = ScsiReadCapacityResponse.read(inBuffer)
         blockSize = readCapacityResponse.blockLength
         lastBlockAddress = readCapacityResponse.logicalBlockAddress
