@@ -106,8 +106,8 @@ class ScsiBlockDevice(private val usbCommunication: UsbCommunication, private va
 
         val readCapacity = ScsiReadCapacity(lun=lun)
         inBuffer.clear()
-        //transferCommand(readCapacity, inBuffer)
-       // inBuffer.clear()
+        transferCommand(readCapacity, inBuffer)
+        inBuffer.clear()
         val readCapacityResponse = ScsiReadCapacityResponse.read(inBuffer)
         blockSize = readCapacityResponse.blockLength
         lastBlockAddress = readCapacityResponse.logicalBlockAddress
@@ -291,7 +291,7 @@ class ScsiBlockDevice(private val usbCommunication: UsbCommunication, private va
     }
 
     companion object {
-        private const val MAX_RECOVERY_ATTEMPTS = 1
+        private const val MAX_RECOVERY_ATTEMPTS = 3
         private val TAG = ScsiBlockDevice::class.java.simpleName
     }
 }
